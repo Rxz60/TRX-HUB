@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مستخرج اللقطات · كل ثانية</title>
+    <title>RAW · كل ثانية · حفظ فوري</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: #0b1120;
             color: #e2e8f0;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            padding: 24px 16px;
+            padding: 20px 12px;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,30 +21,29 @@
         }
         header {
             background: #1e293b;
-            padding: 24px 20px;
-            border-radius: 20px;
+            padding: 22px 16px;
+            border-radius: 24px;
             border: 1px solid #334155;
             margin-bottom: 28px;
             text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
         header h1 {
             font-weight: 600;
-            font-size: 1.9rem;
-            letter-spacing: 0.5px;
+            font-size: 2rem;
             color: #60a5fa;
+            letter-spacing: 0.5px;
         }
         header p {
             color: #94a3b8;
             margin-top: 6px;
+            font-size: 1rem;
         }
         .card {
             background: #1e293b;
             border: 1px solid #334155;
-            border-radius: 20px;
-            padding: 24px 20px;
+            border-radius: 24px;
+            padding: 22px 18px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         .card-title {
             font-size: 1.5rem;
@@ -59,44 +58,41 @@
             background: #2563eb;
             color: white;
             font-weight: 600;
-            padding: 12px 28px;
+            padding: 12px 30px;
             border-radius: 40px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: 0.2s;
             font-size: 1rem;
             border: none;
         }
-        .upload-label:hover {
-            background: #1d4ed8;
-        }
+        .upload-label:hover { background: #1d4ed8; }
         input[type="file"] { display: none; }
         #videoPreview {
             width: 100%;
-            max-height: 360px;
+            max-height: 340px;
             background: #0f172a;
             border-radius: 16px;
-            margin: 20px 0 12px;
+            margin: 18px 0 10px;
             border: 1px solid #334155;
             display: none;
         }
         .status-badge {
             color: #38bdf8;
             font-weight: 500;
-            margin: 6px 0 16px;
-            padding: 8px 0;
+            margin: 6px 0 14px;
+            padding: 6px 0;
         }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 18px;
-            margin-top: 22px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
         }
         .frame-card {
             background: #0f172a;
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid #334155;
-            transition: 0.1s;
             display: flex;
             flex-direction: column;
         }
@@ -108,11 +104,12 @@
             background: #020617;
         }
         .frame-meta {
-            padding: 10px 8px 8px;
-            font-size: 0.85rem;
+            padding: 8px 6px;
+            font-size: 0.8rem;
             text-align: center;
             color: #cbd5e1;
             background: #0f172a;
+            border-top: 1px solid #1e293b;
         }
         .save-btn {
             background: #2563eb;
@@ -126,9 +123,7 @@
             transition: background 0.15s;
             border-radius: 0 0 14px 14px;
         }
-        .save-btn:hover {
-            background: #1d4ed8;
-        }
+        .save-btn:hover { background: #1d4ed8; }
         .url-section {
             display: flex;
             flex-wrap: wrap;
@@ -144,36 +139,32 @@
             color: #f8fafc;
             font-size: 1rem;
         }
-        .url-section input::placeholder {
-            color: #64748b;
-        }
+        .url-section input::placeholder { color: #64748b; }
         .action-btn {
             background: #0ea5e9;
             border: none;
             color: white;
             font-weight: 600;
-            padding: 14px 32px;
+            padding: 14px 34px;
             border-radius: 40px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background 0.2s;
+            transition: 0.2s;
             flex: 1 0 auto;
         }
-        .action-btn:hover {
-            background: #0284c7;
-        }
+        .action-btn:hover { background: #0284c7; }
         .url-image-box {
-            margin-top: 24px;
+            margin-top: 22px;
             background: #0f172a;
             border-radius: 18px;
-            padding: 20px;
+            padding: 18px;
             border: 1px solid #334155;
             display: none;
             text-align: center;
         }
         .url-image-box img {
             max-width: 100%;
-            max-height: 420px;
+            max-height: 400px;
             border-radius: 12px;
             margin-bottom: 12px;
             border: 1px solid #2d3a4f;
@@ -183,30 +174,30 @@
             border: none;
             color: white;
             font-weight: 600;
-            padding: 12px 28px;
+            padding: 12px 32px;
             border-radius: 40px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background 0.15s;
+            transition: 0.15s;
         }
-        .url-save-btn:hover {
-            background: #059669;
-        }
-        .raw-hint {
+        .url-save-btn:hover { background: #059669; }
+        .raw-note {
             color: #64748b;
             font-size: 0.9rem;
-            margin-top: 16px;
+            margin-top: 20px;
             border-top: 1px dashed #2d3a4f;
             padding-top: 14px;
             text-align: center;
+            letter-spacing: 0.3px;
         }
+        .raw-note span { color: #facc15; font-weight: 500; }
     </style>
 </head>
 <body>
 <div class="app">
     <header>
-        <h1>⏱️ مستخرج اللقطات · كل ثانية</h1>
-        <p>رفع فيديو ← استخراج صورة لكل ثانية + حفظ مباشر · رابط خارجي</p>
+        <h1>📸 RAW · كل ثانية</h1>
+        <p>رفع فيديو ← استخراج صورة لكل ثانية · حفظ مباشر في الجهاز · رابط خارجي</p>
     </header>
 
     <!-- قسم الفيديو -->
@@ -228,19 +219,18 @@
         </div>
         <div class="url-image-box" id="urlImageBlock">
             <img id="targetUrlImage" src="" alt="الصورة المستوردة">
-            <button class="url-save-btn" id="downloadUrlImgBtn">💾 حفظ الصورة في جهازك</button>
+            <button class="url-save-btn" id="downloadUrlImgBtn">💾 حفظ الصورة في الجهاز</button>
         </div>
     </div>
 
-    <div class="raw-hint">· RAW · لا إضافات · كل ثانية تُصوَّر · حفظ فوري</div>
+    <div class="raw-note"><span>⚡ RAW</span> · كل صورة تُحفظ مباشرة في جهازك · لا ملفات مؤقتة · الرابط يُعرض ويُحفظ</div>
 </div>
 
-<!-- كانفاس خفي للاستخراج -->
+<!-- كانفاس خفي -->
 <canvas id="conversionCanvas" style="display:none;"></canvas>
 
 <script>
     (function() {
-        // عناصر الفيديو
         const videoInput = document.getElementById('videoInput');
         const videoPreview = document.getElementById('videoPreview');
         const videoGallery = document.getElementById('videoGallery');
@@ -248,21 +238,19 @@
         const canvas = document.getElementById('conversionCanvas');
         const ctx = canvas.getContext('2d');
 
-        // عناصر الرابط
         const imageUrlInput = document.getElementById('imageUrlInput');
         const fetchUrlBtn = document.getElementById('fetchUrlBtn');
         const urlImageBlock = document.getElementById('urlImageBlock');
         const targetUrlImage = document.getElementById('targetUrlImage');
         const downloadUrlImgBtn = document.getElementById('downloadUrlImgBtn');
 
-        // ----- معالج الفيديو (كل ثانية) -----
+        // ----- الفيديو: استخراج كل ثانية مع حفظ فوري -----
         videoInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
 
-            // إعادة ضبط
             videoGallery.innerHTML = '';
-            processStatus.innerText = '⏳ جاري تحميل الفيديو...';
+            processStatus.innerText = '⏳ تحميل الفيديو...';
 
             const fileURL = URL.createObjectURL(file);
             videoPreview.src = fileURL;
@@ -272,7 +260,7 @@
             videoPreview.onloadedmetadata = function() {
                 const duration = Math.floor(videoPreview.duration);
                 if (duration <= 0) {
-                    processStatus.innerText = '⚠️ المدة غير صالحة';
+                    processStatus.innerText = '⚠️ مدة غير صالحة';
                     return;
                 }
 
@@ -281,33 +269,29 @@
                 processStatus.innerText = `⏳ استخراج ${duration} لقطة ...`;
 
                 let currentSecond = 0;
-                let isProcessing = true;
+                let active = true;
 
-                // دالة استخراج متسلسلة (بدون setInterval)
                 function extractNext() {
-                    if (!isProcessing || currentSecond > duration) {
-                        processStatus.innerText = `✅ اكتمل استخراج ${duration} لقطة`;
-                        isProcessing = false;
+                    if (!active || currentSecond > duration) {
+                        processStatus.innerText = `✅ اكتمل (${duration} لقطة)`;
+                        active = false;
                         return;
                     }
-
-                    // ضبط الوقت
                     videoPreview.currentTime = currentSecond;
                 }
 
                 videoPreview.onseeked = function() {
-                    if (!isProcessing) return;
+                    if (!active) return;
                     if (currentSecond > duration) {
                         processStatus.innerText = `✅ اكتمل (${duration} لقطة)`;
-                        isProcessing = false;
+                        active = false;
                         return;
                     }
 
-                    // رسم الإطار على الكانفاس
                     ctx.drawImage(videoPreview, 0, 0, canvas.width, canvas.height);
                     const dataURL = canvas.toDataURL('image/jpeg', 0.92);
 
-                    // إنشاء بطاقة الصورة
+                    // بناء بطاقة الصورة
                     const card = document.createElement('div');
                     card.className = 'frame-card';
 
@@ -324,6 +308,7 @@
                     saveBtn.innerText = '💾 حفظ';
                     saveBtn.onclick = function(e) {
                         e.stopPropagation();
+                        // حفظ مباشر في الجهاز (تحميل)
                         const a = document.createElement('a');
                         a.href = dataURL;
                         a.download = `frame_${currentSecond}s.jpg`;
@@ -335,13 +320,12 @@
                     card.appendChild(saveBtn);
                     videoGallery.appendChild(card);
 
-                    // الانتقال للثانية التالية
                     currentSecond++;
                     if (currentSecond <= duration) {
                         videoPreview.currentTime = currentSecond;
                     } else {
                         processStatus.innerText = `✅ اكتمل (${duration} لقطة)`;
-                        isProcessing = false;
+                        active = false;
                     }
                 };
 
@@ -350,27 +334,24 @@
                 videoPreview.currentTime = 0;
             };
 
-            // في حال خطأ
             videoPreview.onerror = function() {
-                processStatus.innerText = '❌ تعذر معالجة الفيديو';
+                processStatus.innerText = '❌ خطأ في الفيديو';
             };
         });
 
-        // ----- جلب الصورة من الرابط (مع حفظ) -----
-        fetchUrlBtn.addEventListener('click', fetchImageFromUrl);
-
-        function fetchImageFromUrl() {
+        // ----- الرابط: عرض الصورة + حفظ مباشر (RAW) -----
+        fetchUrlBtn.addEventListener('click', function() {
             const url = imageUrlInput.value.trim();
             if (!url) {
-                alert('الرجاء إدخال رابط صورة صحيح');
+                alert('أدخل رابط صورة صحيح');
                 return;
             }
 
-            // عرض الصورة مباشرة (قد تظهر في حال السماح)
+            // عرض الصورة من الرابط
             targetUrlImage.src = url;
             urlImageBlock.style.display = 'block';
 
-            // تحميل وحفظ الصورة عبر fetch + blob (مع الاحتياط)
+            // زر الحفظ: يحاول جلب الصورة كـ blob ثم حفظها مباشرة
             downloadUrlImgBtn.onclick = async function() {
                 try {
                     const response = await fetch(url, { mode: 'cors' });
@@ -385,7 +366,7 @@
                     document.body.removeChild(a);
                     URL.revokeObjectURL(blobUrl);
                 } catch (_) {
-                    // البديل: فتح الصورة في تبويب جديد مع محاولة الحفظ
+                    // الحل البديل: فتح الرابط في تبويب جديد مع محاولة الحفظ
                     const a = document.createElement('a');
                     a.href = url;
                     a.target = '_blank';
@@ -394,11 +375,11 @@
                 }
             };
 
-            // في حال فشل تحميل الصورة يعطي إنذار
+            // في حال تعذر عرض الصورة
             targetUrlImage.onerror = function() {
-                alert('⚠️ تعذر عرض الصورة من الرابط (قد يكون الرابط غير مباشر أو محمي)');
+                alert('⚠️ لا يمكن عرض الصورة من هذا الرابط (قد يكون الرابط غير مباشر)');
             };
-        }
+        });
     })();
 </script>
 </body>
